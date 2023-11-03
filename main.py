@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from database import User
 from pydantic import BaseModel
+import uvicorn
 
 # Create our FastAPI instance
 app = FastAPI()
@@ -51,3 +52,7 @@ async def get_user(email: str):
         return {"message": "User not found"}
     else:
         return {"email": found_user.email, "name": found_user.name}
+
+# Allow us to deploy on Render.com
+if __name__ == "__main__":
+    uvicorn.run(app, host="0.0.0.0", port=10000)
