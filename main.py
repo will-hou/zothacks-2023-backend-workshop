@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+import uvicorn
 
 # Create our FastAPI instance
 app = FastAPI()
@@ -25,3 +26,7 @@ async def add_user():
 @app.get("/users/{email}")
 async def get_user(email: str):
     pass
+
+# Allow us to deploy on Render.com
+if __name__ == "__main__":
+    uvicorn.run(app, host="0.0.0.0", port=10000)
